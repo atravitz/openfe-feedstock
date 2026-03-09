@@ -1,6 +1,6 @@
 {% set python_min = '3.11' %}
 {% set name = "openfe" %}
-{% set version = "v1.9.1.dev.membranes.0" %}
+{% set version = "1.9.1.dev.membranes.0" %}
 
 package:
   name: openfe-suite
