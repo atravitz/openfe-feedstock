@@ -1,6 +1,6 @@
 {% set python_min = '3.11' %}
 {% set name = "openfe" %}
-{% set version = "1.10.a0" %}
+{% set version = "v1.9.1.dev.membranes.0" %}
 
 package:
   name: openfe-suite
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/OpenFreeEnergy/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 0f987783ef58ccc560a0166b0076db0844e5ddf53d9d62a284333ca29bc1585f
+  sha256: b7af0d0878c64e7d183dccd74ead855f833d6c5179cd0c7397a0aa3ce7c2d0ea
 
 build:
   number: 0
@@ -30,7 +30,7 @@ outputs:
       run:
         - cinnabar >=0.5.0,<0.6.0
         - click >=8.2.0,<9.0
-        - gufe >=1.8.0,<1.9
+        - gufe ==1.9.0a0
         - kartograf >=1.2.0,<2.0
         - konnektor >=0.2.0,<0.3.0
         - lomap2 >=3.2.1
