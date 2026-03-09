@@ -1,13 +1,13 @@
 {% set python_min = '3.11' %}
 {% set name = "openfe" %}
-{% set version = "1.9.1dev0" %}
+{% set version = "1.9.1.dev0" %}
 
 package:
   name: openfe-suite
   version: {{ version }}
 
 source:
-  url: https://github.com/OpenFreeEnergy/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  url: https://github.com/OpenFreeEnergy/{{ name }}/archive/refs/tags/v1.9.1dev0.tar.gz
   sha256: fe7765ab210b3ba8cadbd61d2d32ea2c2a8e5dfec94694911c5cb2c825589816
 
 build:
