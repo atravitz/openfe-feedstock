@@ -43,14 +43,14 @@ Current release info
 Installing openfe
 =================
 
-Installing `openfe` from the `conda-forge/label/openfe_rc` channel can be achieved by adding `conda-forge/label/openfe_rc` to your channels with:
+Installing `openfe` from the `conda-forge/label/openfe_dev` channel can be achieved by adding `conda-forge/label/openfe_dev` to your channels with:
 
 ```
-conda config --add channels conda-forge/label/openfe_rc
+conda config --add channels conda-forge/label/openfe_dev
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge/label/openfe_rc` channel has been enabled, `openfe, openfe-base` can be installed with `conda`:
+Once the `conda-forge/label/openfe_dev` channel has been enabled, `openfe, openfe-base` can be installed with `conda`:
 
 ```
 conda install openfe openfe-base
@@ -65,26 +65,26 @@ mamba install openfe openfe-base
 It is possible to list all of the versions of `openfe` available on your platform with `conda`:
 
 ```
-conda search openfe --channel conda-forge/label/openfe_rc
+conda search openfe --channel conda-forge/label/openfe_dev
 ```
 
 or with `mamba`:
 
 ```
-mamba search openfe --channel conda-forge/label/openfe_rc
+mamba search openfe --channel conda-forge/label/openfe_dev
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search openfe --channel conda-forge/label/openfe_rc
+mamba repoquery search openfe --channel conda-forge/label/openfe_dev
 
 # List packages depending on `openfe`:
-mamba repoquery whoneeds openfe --channel conda-forge/label/openfe_rc
+mamba repoquery whoneeds openfe --channel conda-forge/label/openfe_dev
 
 # List dependencies of `openfe`:
-mamba repoquery depends openfe --channel conda-forge/label/openfe_rc
+mamba repoquery depends openfe --channel conda-forge/label/openfe_dev
 ```
 
 
