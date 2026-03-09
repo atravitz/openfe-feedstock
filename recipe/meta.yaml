@@ -7,7 +7,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/OpenFreeEnergy/{{ name }}.git
+  url: https://github.com/OpenFreeEnergy/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
   sha256: fe7765ab210b3ba8cadbd61d2d32ea2c2a8e5dfec94694911c5cb2c825589816
 
 build:
