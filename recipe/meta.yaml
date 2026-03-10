@@ -11,7 +11,7 @@ source:
   sha256: 780a759d10614c7849dcd48957bc3e06983d8a1adc6caf4813e3e7a519e61db4 
 
 build:
-  number: 2
+  number: 3
 
 outputs:
   - name: openfe-base
@@ -32,7 +32,7 @@ outputs:
         - click >=8.2.0,<9.0
         - gufe >=1.8.0,<1.9
         - kartograf >=1.2.0,<2.0
-        - konnektor >=0.2.0,<0.3.0
+        - konnektor >=0.2.0,<0.4.0
         - lomap2 >=3.2.1
         - matplotlib-base
         - networkx
