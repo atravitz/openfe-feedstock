@@ -1,30 +1,32 @@
-{% set python_min = '3.11' %}
-{% set name = "openfe" %}
-{% set version = "1.9.1" %}
+schema_version: 1
 
-package:
+context:
+  python_min: "3.11"
+  name: openfe
+  version: "1.9.1"
+
+recipe:
   name: openfe-suite
-  version: {{ version }}
+  version: ${{ version }}
 
 source:
-  url: https://github.com/OpenFreeEnergy/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 780a759d10614c7849dcd48957bc3e06983d8a1adc6caf4813e3e7a519e61db4 
+  url: https://github.com/OpenFreeEnergy/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 780a759d10614c7849dcd48957bc3e06983d8a1adc6caf4813e3e7a519e61db4
 
 build:
   number: 3
 
 outputs:
-  - name: openfe-base
-    script: build_base.sh
+  - package:
+      name: openfe-base
     build:
       noarch: python
-    entry_points:
-      - openfe = openfecli.cli:main
-
+      script:
+        file: build_base.sh
     requirements:
       host:
         - pip
-        - python {{ python_min }}
+        - python 3.11.*
         - setuptools
         - setuptools_scm
       run:
@@ -54,66 +56,71 @@ outputs:
         - pytest
         - pytest-regressions
         - pytest-rerunfailures
-        - python >={{ python_min }}
-        - rdkit 
+        - python >=${{ python_min }}
+        - rdkit
         - rich
         - threadpoolctl
         - typing-extensions
-      run_constrained:
+      run_constraints:
         - dask >=2025
-        # drop this constraint when handled upstream in espaloma-feedstock
-        - smirnoff99frosst >=1.1.0.1  #https://github.com/openforcefield/smirnoff99Frosst/issues/109
-        - openff-interchange-base != 0.5.1  # https://github.com/openforcefield/openff-interchange/issues/1450
-
-    test:
-      imports:
-        - openfe
-      requires:
-        - pip
-        - pytest-xdist
-        - python {{ python_min }}
-      commands:
-        - openfe --help
-        - openfe --version
-        - python -c "import {{ name }}; print({{ name }}.__version__)"
-        - python -c "import {{ name }}; assert({{ name }}.__version__ == '{{ version }}')"
-        - pytest -v --pyargs openfe openfecli
-
-  - name: openfe
+        - smirnoff99frosst >=1.1.0.1
+        - openff-interchange-base != 0.5.1
+    tests:
+      - python:
+          imports:
+            - openfe
+          pip_check: false
+          python_version: ${{ python_min }}
+      - requirements:
+          run:
+            - pip
+            - pytest-xdist
+            - python ${{ python_min }}
+        script:
+          - openfe --help
+          - openfe --version
+          - python -c "import ${{ name }}; print(${{ name }}.__version__)"
+          - python -c "import ${{ name }}; assert(${{ name }}.__version__ == '${{ version }}')"
+          - pytest -v --pyargs openfe openfecli
+    entry_points:
+      - openfe = openfecli.cli:main
+    # Test section duplicated for now, will be more important later
+    # when we add more packages and skip tests for optional deps
+    package:
+      name: openfe
     build:
       noarch: python
-
     requirements:
       host:
         - pip
-        - python {{ python_min }}
+        - python 3.11.*
         - setuptools
         - setuptools_scm
       run:
-        - python >={{ python_min }}
+        - python >=${{ python_min }}
         - jq
         - py3dmol
-        - {{ pin_subpackage('openfe-base', exact=True) }}
-    # Test section duplicated for now, will be more important later
-    # when we add more packages and skip tests for optional deps
-    test:
-      imports:
-        - openfe
-      requires:
-        - pip
-        - pytest-xdist
-        - python {{ python_min }}
-      commands:
-        - openfe --help
-        - openfe --version
-        - python -c "import {{ name }}; print({{ name }}.__version__)"
-        - python -c "import {{ name }}; assert({{ name }}.__version__ == '{{ version }}')"
-        - pytest -v --pyargs openfe openfecli
+        - ${{ pin_subpackage('openfe-base', exact=True) }}
+    tests:
+      - python:
+          imports:
+            - openfe
+          pip_check: false
+          python_version: ${{ python_min }}
+      - requirements:
+          run:
+            - pip
+            - pytest-xdist
+            - python ${{ python_min }}
+        script:
+          - openfe --help
+          - openfe --version
+          - python -c "import ${{ name }}; print(${{ name }}.__version__)"
+          - python -c "import ${{ name }}; assert(${{ name }}.__version__ == '${{ version }}')"
+          - pytest -v --pyargs openfe openfecli
 
 about:
-  home: https://openfree.energy/
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Free software for Free Energies.
   description: |
@@ -121,8 +128,9 @@ about:
     development of open source tools for free energy calculations to guide
     pharmaceutical drug design and discovery. This package enables researchers
     to plan, execute, and analyze networks of free energy calculations.
-  doc_url: https://docs.openfree.energy
-  dev_url: https://github.com/OpenFreeEnergy/openfe
+  homepage: https://openfree.energy/
+  repository: https://github.com/OpenFreeEnergy/openfe
+  documentation: https://docs.openfree.energy
 
 extra:
   feedstock-name: openfe
