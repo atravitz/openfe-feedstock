@@ -23,6 +23,9 @@ outputs:
       noarch: python
       script:
         file: build_base.sh
+      python:
+          entry_points:
+            - openfe = openfecli.cli:main
     requirements:
       host:
         - pip
@@ -82,11 +85,10 @@ outputs:
           - python -c "import ${{ name }}; print(${{ name }}.__version__)"
           - python -c "import ${{ name }}; assert(${{ name }}.__version__ == '${{ version }}')"
           - pytest -v --pyargs openfe openfecli
-    entry_points:
-      - openfe = openfecli.cli:main
+
     # Test section duplicated for now, will be more important later
     # when we add more packages and skip tests for optional deps
-    package:
+  - package:
       name: openfe
     build:
       noarch: python
