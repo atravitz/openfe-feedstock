@@ -78,7 +78,7 @@ outputs:
           run:
             - pip
             - pytest-xdist
-            - python ${{ python_min }}
+            - python ${{ python_min }}.*
         script:
           - openfe --help
           - openfe --version
@@ -113,7 +113,7 @@ outputs:
           run:
             - pip
             - pytest-xdist
-            - python ${{ python_min }}
+            - python ${{ python_min }}.*
         script:
           - openfe --help
           - openfe --version
