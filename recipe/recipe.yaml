@@ -35,7 +35,7 @@ outputs:
       run:
         - cinnabar >=0.5.0,<0.6.0
         - click >=8.2.0,<9.0
-        - gufe >=1.8.0,<1.9
+        - gufe >=1.9.0,<1.10
         - kartograf >=1.2.0,<2.0
         - konnektor >=0.2.0,<0.4.0
         - lomap2 >=3.2.1
